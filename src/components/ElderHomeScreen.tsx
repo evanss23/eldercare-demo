@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaMusic, FaComments, FaHeart, FaClock, FaPills, FaExclamationCircle, FaExpand, FaSparkles } from "react-icons/fa";
+import { FaMusic, FaComments, FaHeart, FaClock, FaPills, FaExclamationCircle, FaExpand, FaStar } from "react-icons/fa";
 import { mockMemories, mockProfile } from "../mockData";
 import Link from "next/link";
 import { usePolling } from "@/../../hooks/usePolling";
@@ -32,13 +32,11 @@ function ElderHomeScreenContent() {
     // For demo, we'll simulate new memories occasionally
     if (Math.random() > 0.7) {
       const newMemory = {
-        id: `new-${Date.now()}`,
+        id: Date.now(),
         type: 'photo' as const,
         url: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 100000000000)}?w=800&h=600&fit=crop`,
         caption: `New memory from ${['Sarah', 'Michael', 'Emma', 'David'][Math.floor(Math.random() * 4)]}! 💕`,
-        date: 'Just now',
-        category: 'family',
-        createdBy: 'family'
+        date: 'Just now'
       };
       
       setMemories(prev => {
@@ -117,7 +115,7 @@ function ElderHomeScreenContent() {
           >
             <ImageWithFallback
               src={currentMemory.url}
-              alt={currentMemory.caption}
+              alt={currentMemory.caption || "Memory photo"}
               className="w-full h-full"
               fallbackSrc="/images/memory-placeholder.jpg"
               onError={() => {
@@ -157,7 +155,7 @@ function ElderHomeScreenContent() {
                     animate={{ rotate: [0, 180, 360] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <FaSparkles size={16} />
+                    <FaStar size={16} />
                   </motion.div>
                   <span className="font-medium">New Memory!</span>
                 </motion.div>
@@ -358,7 +356,7 @@ function ElderHomeScreenContent() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               src={currentMemory.url}
-              alt={currentMemory.caption}
+              alt={currentMemory.caption || "Memory photo"}
               className="max-w-full max-h-full object-contain"
             />
             <button

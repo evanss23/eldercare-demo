@@ -280,7 +280,7 @@ export function useOptimizedAPI<T = any>(
   const { request } = useAPIOptimization();
 
   const fetchData = useCallback(async () => {
-    if (!options?.enabled ?? true) return;
+    if (options?.enabled === false) return;
     
     setLoading(true);
     setError(null);

@@ -41,7 +41,9 @@ export default function RootLayout({
         <ResourceHints />
         <ErrorBoundary
           onError={(error, errorInfo) => {
-            reportErrorBoundary(error, errorInfo, {
+            reportErrorBoundary(error, { 
+              componentStack: errorInfo?.componentStack || undefined 
+            }, {
               location: 'root-layout'
             });
           }}

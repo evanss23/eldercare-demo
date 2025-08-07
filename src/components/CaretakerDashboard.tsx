@@ -71,9 +71,9 @@ export default function CaretakerDashboard() {
     // Simulate safety status changes
     if (Math.random() > 0.9) {
       const statuses = [
-        { level: 'green', message: 'All Clear' },
-        { level: 'yellow', message: 'Minor Concern' },
-        { level: 'red', message: 'Needs Attention' }
+        { level: 'green' as const, message: 'All Clear' },
+        { level: 'yellow' as const, message: 'Minor Concern' },
+        { level: 'red' as const, message: 'Needs Attention' }
       ];
       const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
       
@@ -667,6 +667,8 @@ export default function CaretakerDashboard() {
             </motion.div>
           </div>
         )}
+        </>
+        )}
       </main>
 
       {/* Toast Notifications */}
@@ -675,8 +677,6 @@ export default function CaretakerDashboard() {
         onClose={removeToast} 
         position="bottom-right" 
       />
-        )}
-      </main>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import {
   FaMusic,
   FaCloudUploadAlt,
   FaWifi,
-  FaWifiSlash
+  FaExclamationCircle
 } from 'react-icons/fa';
 import Link from 'next/link';
 import { MemoryUpload } from '@/components/MemoryUpload';
@@ -181,7 +181,7 @@ export default function CaregiverMemoriesPage() {
                 {isOnline ? (
                   <FaWifi className="text-green-600" size={16} />
                 ) : (
-                  <FaWifiSlash className="text-yellow-600" size={16} />
+                  <FaExclamationCircle className="text-yellow-600" size={16} />
                 )}
                 <span className={`text-sm font-medium ${
                   isOnline ? 'text-green-700' : 'text-yellow-700'

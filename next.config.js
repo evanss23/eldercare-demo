@@ -3,8 +3,6 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
   
-  // Optimize production builds
-  swcMinify: true,
   
   // Image optimization
   images: {
@@ -17,11 +15,8 @@ const nextConfig = {
   webpack: (config, { isServer, dev }) => {
     // Production optimizations
     if (!dev && !isServer) {
-      // Enable tree shaking for icons
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'react-icons': 'react-icons/lib',
-      };
+      // Remove incorrect alias that was causing build errors
+      // react-icons v5 doesn't support /lib path anymore
       
       // Split chunks for better caching
       config.optimization.splitChunks = {
@@ -67,12 +62,8 @@ const nextConfig = {
   
   // Enable experimental features
   experimental: {
-    // Enable app directory
-    appDir: true,
     // Optimize CSS
     optimizeCss: true,
-    // Enable server components
-    serverComponents: true,
   },
   
   // Headers for caching and security
@@ -147,13 +138,6 @@ const nextConfig = {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://flycycy-eldercareai.hf.space',
   },
   
-  // PWA configuration
-  pwa: {
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-    disable: process.env.NODE_ENV === 'development',
-  },
 };
 
 module.exports = nextConfig;

@@ -30,10 +30,10 @@ export function useBackgroundSync(options: UseBackgroundSyncOptions = {}) {
     onSuccess
   } = options;
 
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncQueue, setSyncQueue] = useState<SyncTask[]>([]);
-  const syncIntervalRef = useRef<NodeJS.Timeout>();
+  const syncIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Load queue from storage
   const loadQueue = useCallback(() => {

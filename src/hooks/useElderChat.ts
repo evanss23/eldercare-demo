@@ -92,7 +92,7 @@ export const useElderChat = () => {
     if (voices.length > 0 && !selectedVoice) {
       const friendlyVoice = findElderlyFriendlyVoice(voices);
       if (friendlyVoice) {
-        setVoice(friendlyVoice);
+        setVoice(friendlyVoice.name);
       }
     }
   }, [voices, selectedVoice, setVoice]);

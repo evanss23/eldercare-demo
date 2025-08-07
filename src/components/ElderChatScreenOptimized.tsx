@@ -17,7 +17,7 @@ import { TextInputSection } from "./chat/TextInputSection";
 import { SuccessMessage } from "./chat/SuccessMessage";
 
 // Lazy load heavy components
-const VoiceControls = lazy(() => import("@/components/VoiceControls"));
+const VoiceControls = lazy(() => import("@/components/VoiceControls").then(module => ({ default: module.VoiceControls })));
 
 function ElderChatScreenContent() {
   const {
