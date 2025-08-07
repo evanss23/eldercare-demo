@@ -1,6 +1,13 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import InstallPrompt from "@/components/InstallPrompt";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { reportErrorBoundary } from "@/utils/errorReporting";
+import ResourceHints from "@/components/ResourceHints";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,12 +19,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "ElderCare",
-  description: "Comprehensive eldercare management application",
-  manifest: "/manifest.json",
-  themeColor: "#6366F1",
-};
+// Note: metadata export removed because this is now a Client Component due to ErrorBoundary
 
 export default function RootLayout({
   children,
@@ -26,10 +28,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>ElderCare AI Companion</title>
+        <meta name="description" content="AI-powered companion for elderly care with validation therapy" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#6366F1" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ResourceHints />
+        <ErrorBoundary
+          onError={(error, errorInfo) => {
+            reportErrorBoundary(error, errorInfo, {
+              location: 'root-layout'
+            });
+          }}
+        >
+          <ServiceWorkerRegistration />
+          <InstallPrompt />
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   );

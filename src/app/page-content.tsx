@@ -20,9 +20,18 @@ export default function HomePageContent() {
         >
           ElderCare
         </motion.h1>
-        <p className="text-xl text-gray-600 mb-12">
+        <p className="text-xl text-gray-600 mb-8">
           Connecting families with love and care
         </p>
+        
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-700 text-lg font-medium mb-2">🎯 Demo Features</p>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>• Caretaker Dashboard: Manage medication, upload memories, chat history</p>
+            <p>• Elder Interface: Simple slideshow, music player, easy communication</p>
+            <p>• Real-time updates between both interfaces</p>
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           <Link href="/elder">
@@ -34,8 +43,11 @@ export default function HomePageContent() {
               <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-6">
                 <FaUser className="text-white" size={48} />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Elder View</h2>
-              <p className="text-gray-600">Simple interface for seniors</p>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Elder Interface</h2>
+              <p className="text-gray-600">📱 Large buttons, photo slideshow, music</p>
+              <div className="text-xs text-purple-600 mt-2 font-medium">
+                Perfect for seniors who need simple navigation
+              </div>
             </motion.div>
           </Link>
 
@@ -48,8 +60,11 @@ export default function HomePageContent() {
               <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full flex items-center justify-center mx-auto mb-6">
                 <FaUserMd className="text-white" size={48} />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Caretaker View</h2>
-              <p className="text-gray-600">Monitor and manage care</p>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Caretaker Dashboard</h2>
+              <p className="text-gray-600">🏥 Full management, monitoring & communication</p>
+              <div className="text-xs text-blue-600 mt-2 font-medium">
+                For family members and healthcare providers
+              </div>
             </motion.div>
           </Link>
         </div>
