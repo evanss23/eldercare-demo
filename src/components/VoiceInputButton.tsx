@@ -10,6 +10,8 @@ interface VoiceInputButtonProps {
   error?: string | null;
   transcript?: string;
   interimTranscript?: string;
+  useVapi?: boolean;
+  onVapiTrigger?: () => void;
 }
 
 export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
@@ -20,6 +22,8 @@ export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
   error,
   transcript,
   interimTranscript,
+  useVapi = false,
+  onVapiTrigger,
 }) => {
   if (!isSupported) {
     return (
@@ -38,7 +42,7 @@ export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
       {/* Microphone Button */}
       <motion.button
         whileTap={{ scale: 0.95 }}
-        onClick={isListening ? onStop : onStart}
+        onClick={useVapi ? onVapiTrigger : (isListening ? onStop : onStart)}
         className={`
           relative p-4 rounded-full transition-all duration-300 
           ${isListening 

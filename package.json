@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vapi-ai/web": "^2.3.10",
     "critters": "^0.0.23",
     "framer-motion": "^11.11.17",
     "next": "15.4.2",

@@ -10,6 +10,7 @@ import { useSpeechSynthesis, findElderlyFriendlyVoice } from "@/../../hooks/useS
 import { VoiceInputButton } from "@/components/VoiceInputButton";
 import { VoiceControls } from "@/components/VoiceControls";
 import { VoiceFallback, MicrophonePermissionHelper } from "@/components/VoiceFallback";
+import { VapiIntegration, useVapi } from "@/components/VapiIntegration";
 import { APIErrorHandler, useAPIError } from "@/components/APIErrorHandler";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { TextShimmer } from "@/components/Shimmer";
@@ -24,6 +25,7 @@ function ElderChatScreenContent() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showVoiceSettings, setShowVoiceSettings] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const { isReady: vapiReady, startCall: startVapiCall } = useVapi();
   
   const { loading, error, sendMessage, clearError } = useElderCareAPI();
   const { error: apiError, handleError: handleAPIError, clearError: clearAPIError } = useAPIError();
@@ -338,6 +340,8 @@ function ElderChatScreenContent() {
                   error={speechError}
                   transcript={transcript}
                   interimTranscript={interimTranscript}
+                  useVapi={vapiReady}
+                  onVapiTrigger={startVapiCall}
                 />
               </div>
 
@@ -615,6 +619,17 @@ function ElderChatScreenContent() {
           </motion.div>
         )}
       </main>
+
+      {/* Vapi Integration */}
+      <VapiIntegration
+        onCallStart={() => setShowSuccess(true)}
+        onCallEnd={() => setShowSuccess(false)}
+        onError={(error) => {
+          setErrorMessage(`Voice call error: ${error.message}`);
+          setShowError(true);
+          setTimeout(() => setShowError(false), 3000);
+        }}
+      />
     </div>
   );
 }
